@@ -31,6 +31,7 @@ dependencies:
   retrofit: ^4.9.2
   rxdart: ^0.28.0
   shared_preferences: ^2.3.2
+  typewritertext: ^3.0.9
 
 dev_dependencies:
   analyzer: ^8.4.1
