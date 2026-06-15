@@ -2,7 +2,7 @@ import 'package:bloc_effects/bloc_effects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:reclaim/app/di/dependencies.dart';
+import 'package:reclaim/app/app.dart';
 import 'package:reclaim/auth/auth.dart';
 import 'package:reclaim/home/ui/home_cubit/home_cubit.dart';
 
@@ -27,7 +27,7 @@ class BottomNavigationShellPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ReclaimScaffold(
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: handleDestinationSelected,
@@ -98,25 +98,28 @@ class _HomePageState extends State<HomePage> {
       listener: (context, effect) {
         switch (effect) {
           case HomeStateEffectLogout():
-            context.goNamed(LoginPage.routeName);
+            context.pushNamed(LoginPage.routeName);
           case HomeStateEffectError(errorMessage: final errorMessage):
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(errorMessage)),
             );
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Home'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.logout_rounded),
-              onPressed: _bloc.logout,
+      child: ReclaimScaffold(
+        appBar: const ReclaimAppBar(
+          title: 'Home',
+          subTitle: 'Welcome',
+          progressIndicatorSteps: 3,
+          progressIndicatorCurrentStep: 2,
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: ReclaimSecondaryButton.large(onPressed: _bloc.logout, title: 'Logout'),
+              ),
             ),
           ],
-        ),
-        body: const Center(
-          child: Text('Welcome!'),
         ),
       ),
     );

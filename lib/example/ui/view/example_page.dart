@@ -23,21 +23,24 @@ class _ExamplePageState extends State<ExamplePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Example Feature')),
+    return ReclaimScaffold(
+      appBar: const ReclaimAppBar(
+        title: 'Example',
+        subTitle: 'W',
+      ),
       body: BlocBuilder<ExampleCubit, ExampleState>(
         bloc: _bloc,
         builder: (context, state) {
           return switch (state) {
             ExampleStateLoading() => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              child: CircularProgressIndicator(),
+            ),
             ExampleStateSuccess(:final mostStarredGithubRepositories) => GithubRepositoriesList(
-                mostStarredRepositories: mostStarredGithubRepositories,
-              ),
+              mostStarredRepositories: mostStarredGithubRepositories,
+            ),
             ExampleStateError() => const Center(
-                child: Text('Error'),
-              ),
+              child: Text('Error'),
+            ),
           };
         },
       ),
@@ -56,28 +59,48 @@ class GithubRepositoriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return ListView.builder(
+    return ListView.separated(
       itemCount: mostStarredRepositories.length,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       itemBuilder: (context, index) {
         final repository = mostStarredRepositories[index];
-
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          child: ListTile(
-            title: Text(repository.fullName),
-            subtitle: Row(
-              children: [
-                const Icon(Icons.star),
-                const SizedBox(width: ReclaimSpacing.normal),
-                Text(
-                  '${repository.starCount}',
-                  style: textTheme.bodyLarge,
-                ),
-              ],
-            ),
+        final child = ListTile(
+          title: Text(repository.fullName),
+          subtitle: Row(
+            children: [
+              const Icon(Icons.star),
+              const SizedBox(width: ReclaimSpacing.normal),
+              Text(
+                '${repository.starCount}',
+                style: textTheme.bodyLarge,
+              ),
+            ],
           ),
         );
+        switch (index % 4) {
+          case 1:
+            return ReclaimGreenCard(
+              child: child,
+              onTap: () {},
+            );
+          case 2:
+            return ReclaimYellowCard(
+              child: child,
+              onTap: () {},
+            );
+          case 3:
+            return ReclaimLavenderCard(
+              child: child,
+              onTap: () {},
+            );
+          default:
+            return ReclaimCard(
+              child: child,
+              onTap: () {},
+            );
+        }
       },
+      separatorBuilder: (_, index) => const SizedBox(height: ReclaimSpacing.normal),
     );
   }
 }

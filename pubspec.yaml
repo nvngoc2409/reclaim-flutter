@@ -4,7 +4,7 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.2.6 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
   flutter: ">=3.38.0 <4.0.0"
 
 dependencies:
@@ -21,6 +21,7 @@ dependencies:
   freezed_annotation: ^3.0.0
   get_it: ^9.2.1
   go_router: ^17.1.0
+  google_fonts: ^8.1.0
   intl: ^0.20.2
   json_annotation: ^4.9.0
   logging: ^1.3.0
@@ -53,23 +54,34 @@ flutter:
     - assets/images/
 
 #  fonts:
-#    - family: PlusJakarkaSans
+#    - family: Averta
 #      fonts:
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-Regular.ttf
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-ExtraLight.ttf
-#          weight: 200
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-Light.ttf
-#          weight: 300
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-Regular.ttf
+#        - asset: assets/fonts/averta/AvertaStd-Regular.otf
+#        - asset: assets/fonts/averta/AvertaStd-Regular.otf
 #          weight: 400
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-Medium.ttf
-#          weight: 500
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-SemiBold.ttf
+#        - asset: assets/fonts/averta/AvertaStd-RegularItalic.otf
+#          weight: 400
+#          style: italic
+#        - asset: assets/fonts/averta/AvertaStd-Semibold.otf
 #          weight: 600
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-Bold.ttf
+#        - asset: assets/fonts/averta/AvertaStd-SemiboldItalic.otf
+#          weight: 600
+#          style: italic
+#        - asset: assets/fonts/averta/AvertaStd-Bold.otf
 #          weight: 700
-#        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-ExtraBold.ttf
+#        - asset: assets/fonts/averta/AvertaStd-BoldItalic.otf
+#          weight: 700
+#          style: italic
+#        - asset: assets/fonts/averta/AvertaStd-Extrabold.otf
+#          weight: 800
+#        - asset: assets/fonts/averta/AvertaStd-ExtraboldItalic.otf
+#          weight: 800
+#          style: italic
+#        - asset: assets/fonts/averta/AvertaStd-Black.otf
 #          weight: 900
+#        - asset: assets/fonts/averta/AvertaStd-BlackItalic.otf
+#          weight: 900
+#          style: italic
 
 flutter_gen:
   output: lib/assets_gen/

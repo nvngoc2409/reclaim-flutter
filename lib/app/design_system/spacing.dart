@@ -55,7 +55,7 @@ class ReclaimSpacing {
   /// Common spacing aliases for semantic usage
   static const double extraSmall = spacing4;
   static const double small = spacing8;
-  static const double normal = spacing24;
+  static const double normal = spacing16;
   static const double medium = spacing24;
   static const double large = spacing32;
   static const double extraLarge = spacing48;

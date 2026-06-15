@@ -46,8 +46,8 @@ class _LoginPageState extends State<LoginPage> {
             context.loadingOverlay.show();
         }
       },
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Login')),
+      child: ReclaimScaffold(
+        appBar: const ReclaimAppBar(title: 'Login'),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: ReclaimSpacing.large),
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: ReclaimSpacing.extraLarge),
                   SizedBox(
                     width: double.infinity,
-                    child: ReclaimPrimaryButton.large(
+                    child: ReclaimOutlinedButton.large(
                       title: 'Login',
                       onPressed: _onLoginPressed,
                     ),

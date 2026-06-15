@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reclaim/app/app.dart';
 import 'package:reclaim/app/design_system/widgets/loading_overlay/loading_ignores_back_button_router_config.dart';
+import 'package:reclaim/assets_gen/assets.gen.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -17,30 +18,34 @@ class _AppState extends State<App> {
   /// Remove this if the app has too many images.
   Future<void> precacheImages() async {
     final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
-    final imageCachingFutures = assetManifest //
-        .listAssets()
-        .where(
-          (assetPath) => assetPath.endsWith('.jpg') || assetPath.endsWith('.png'),
-        )
-        .map((assetPath) async {
-      final imageProvider = AssetImage(assetPath);
-      await precacheImage(imageProvider, context);
-      if (mounted) {
-        imageProvider.resolve(createLocalImageConfiguration(context)).addListener(
-          ImageStreamListener((imageInfo, synchronousCall) {
-            // An empty listener to keep this image alive forever.
-          }),
-        );
-      }
-    });
+    final imageCachingFutures =
+        assetManifest //
+            .listAssets()
+            .where(
+              (assetPath) => assetPath.endsWith('.jpg') || assetPath.endsWith('.png'),
+            )
+            .map((assetPath) async {
+              final imageProvider = AssetImage(assetPath);
+              await precacheImage(imageProvider, context);
+              if (mounted) {
+                imageProvider
+                    .resolve(createLocalImageConfiguration(context))
+                    .addListener(
+                      ImageStreamListener((imageInfo, synchronousCall) {
+                        // An empty listener to keep this image alive forever.
+                      }),
+                    );
+              }
+            });
 
-    final svgCachingFutures = assetManifest //
-        .listAssets()
-        .where((assetPath) => assetPath.endsWith('.svg'))
-        .map((svgAsset) async {
-      final loader = SvgAssetLoader(svgAsset);
-      await svg.cache.putIfAbsent(loader.cacheKey(null), () => loader.loadBytes(null));
-    });
+    final svgCachingFutures =
+        assetManifest //
+            .listAssets()
+            .where((assetPath) => assetPath.endsWith('.svg'))
+            .map((svgAsset) async {
+              final loader = SvgAssetLoader(svgAsset);
+              await svg.cache.putIfAbsent(loader.cacheKey(null), () => loader.loadBytes(null));
+            });
 
     await Future.wait([...imageCachingFutures, ...svgCachingFutures]);
   }
@@ -64,9 +69,27 @@ class _AppState extends State<App> {
         theme: appTheme,
         routerConfig: LoadingIgnoresBackButtonRouterConfig.fromRouterConfig(router),
         builder: (context, child) => _MediaQueryWrapper(
-          child: LoadingOverlay(
-            loadingIndicatorColor: appTheme.colorScheme.primary,
-            child: child ?? const SizedBox.shrink(),
+          child: Stack(
+            children: [
+              Positioned.fill(child: Assets.images.appBg.image(fit: BoxFit.cover)),
+              const Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Color.fromRGBO(5, 8, 16, 0.95),
+                        Color.fromRGBO(5, 8, 16, 0.8),
+                        Color.fromRGBO(5, 8, 16, 0.4),
+                      ],
+                      stops: [0, 0.42, 1],
+                    ),
+                  ),
+                ),
+              ),
+              if (child != null) child,
+            ],
           ),
         ),
       ),
@@ -103,7 +126,7 @@ class __MediaQueryWrapperState extends State<_MediaQueryWrapper> {
     return MediaQuery(
       data: _mediaQueryData,
       child: LoadingOverlay(
-        loadingIndicatorColor: Theme.of(context).primaryColor,
+        loadingIndicatorColor: appTheme.colorScheme.primary,
         child: widget.child,
       ),
     );

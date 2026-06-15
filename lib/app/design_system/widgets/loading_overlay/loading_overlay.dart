@@ -57,9 +57,9 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
         widget.child,
         if (widget.controller.isVisible)
           Container(
-            height: MediaQuery.sizeOf(context).height,
+            height: double.infinity,
             width: double.infinity,
-            color: widget.backgroundColor ?? Colors.black.withValues(alpha: 0.4),
+            color: widget.backgroundColor ?? Colors.black.withValues(alpha: 0.2),
             child: Center(child: CircularProgressIndicator(color: widget.loadingIndicatorColor)),
           ),
       ],

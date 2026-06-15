@@ -3,7 +3,7 @@ import 'package:reclaim/auth/data/models/user.dart';
 
 part 'login_response.g.dart';
 
-@freezed
+@JsonSerializable()
 class LoginResponse {
   LoginResponse({
     this.data,

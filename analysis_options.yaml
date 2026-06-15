@@ -35,7 +35,8 @@ linter:
     avoid_positional_boolean_parameters: false
     avoid_catches_without_on_clauses: false
     one_member_abstracts: false
-
+formatter:
+  page_width: 1000
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

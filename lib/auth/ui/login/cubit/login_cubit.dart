@@ -1,7 +1,5 @@
 import 'package:bloc_effects/bloc_effects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logging/logging.dart';
-import 'package:reclaim/app/network/data/models/base_response.dart';
 import 'package:reclaim/auth/auth.dart';
 
 part 'login_cubit.freezed.dart';
@@ -29,26 +27,26 @@ class LoginCubit extends CubitWithEffects<LoginState, LoginStateEffect> {
   @visibleForTesting
   final UserRepository userRepository;
 
-  final _logger = Logger('LoginCubit');
-
   Future<void> login({
     required String email,
     required String password,
   }) async {
     emitEffect(const LoginStateEffect.loading());
-    try {
-      final response = await userRepository.login(email, password);
-      if (response.success && response.data != null) {
-        emitEffect(LoginStateEffect.success(user: response.data!));
-      } else {
-        emitEffect(LoginStateEffect.error(errorMessage: response.message));
-      }
-    } on ApiExeption catch (e, stacktrace) {
-      _logger.info('Login error', e, stacktrace);
-      emitEffect(LoginStateEffect.error(errorMessage: e.errorDetail.message));
-    } catch (e, stacktrace) {
-      _logger.info('Login error', e, stacktrace);
-      emitEffect(const LoginStateEffect.error(errorMessage: 'Somthing went wrong. Please check your internet connection and try again.'));
-    }
+    emitEffect(const LoginStateEffect.success(user: User(id: '1')));
+    return;
+    // try {
+    //   final response = await userRepository.login(email, password);
+    //   if (response.success && response.data != null) {
+    //     emitEffect(LoginStateEffect.success(user: response.data!));
+    //   } else {
+    //     emitEffect(LoginStateEffect.error(errorMessage: response.message));
+    //   }
+    // } on ApiExeption catch (e, stacktrace) {
+    //   _logger.info('Login error', e, stacktrace);
+    //   emitEffect(LoginStateEffect.error(errorMessage: e.errorDetail.message));
+    // } catch (e, stacktrace) {
+    //   _logger.info('Login error', e, stacktrace);
+    //   emitEffect(const LoginStateEffect.error(errorMessage: 'Somthing went wrong. Please check your internet connection and try again.'));
+    // }
   }
 }
