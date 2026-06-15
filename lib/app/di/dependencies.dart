@@ -8,6 +8,7 @@ import 'package:reclaim/auth/auth.dart';
 import 'package:reclaim/example/data/data_sources/example_rest_data_source.dart';
 import 'package:reclaim/example/example.dart' hide ExampleRestDataSource;
 import 'package:reclaim/home/ui/home_cubit/home_cubit.dart';
+import 'package:reclaim/onboarding/onboarding.dart';
 import 'package:reclaim/splash_screen/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,8 +39,9 @@ class ProductionServiceLocator {
       ..registerFactory(() => LogoutUseCase(userRepository: getIt()))
       ..registerFactory(() => RefreshTokenUseCase(getIt(), getIt(), getIt()))
       ..registerFactory(() => HomeCubit(userRepository: getIt(), logoutUseCase: getIt()))
-      ..registerFactory(() => SplashCubit(userRepository: getIt(), splashRepository: getIt()))
-      ..registerFactory(() => LoginCubit(userRepository: getIt()));
+      ..registerFactory(() => SplashCubit(onboardingRepository: getIt(), splashRepository: getIt()))
+      ..registerLazySingleton(() => OnboardingRepository(localStorageDataSource: getIt()))
+      ..registerFactory(() => OnboardingCubit(onboardingRepository: getIt()));
   }
 
   Dio createDio(AuthorizationInterceptor authorization) {

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:reclaim/auth/auth.dart';
 import 'package:reclaim/example/example.dart';
 import 'package:reclaim/home/home.dart';
+import 'package:reclaim/onboarding/onboarding.dart';
 import 'package:reclaim/splash_screen/splash_screen.dart';
 
 final router = GoRouter(
@@ -14,9 +14,21 @@ final router = GoRouter(
       builder: (context, routerState) => const SplashScreenPage(),
     ),
     GoRoute(
-      name: LoginPage.routeName,
-      path: '/${LoginPage.routeName}',
-      builder: (context, routerState) => const LoginPage(),
+      name: LandingPage.routeName,
+      path: '/${LandingPage.routeName}',
+      builder: (context, routerState) => const LandingPage(),
+    ),
+    GoRoute(
+      name: OnboardingPage.routeName,
+      path: '/${OnboardingPage.routeName}',
+      builder: (context, routerState) => const OnboardingPage(),
+    ),
+    GoRoute(
+      name: OnboardingResultPage.routeName,
+      path: '/${OnboardingResultPage.routeName}',
+      builder: (context, routerState) => OnboardingResultPage(
+        result: routerState.extra! as OnboardingResult,
+      ),
     ),
     StatefulShellRoute.indexedStack(
       pageBuilder: (context, routerState, navigationShell) {

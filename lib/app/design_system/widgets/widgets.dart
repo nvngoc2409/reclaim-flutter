@@ -1,6 +1,7 @@
 export 'buttons.dart';
 export 'cards.dart';
 export 'dialog.dart';
+export 'loading_dots.dart';
 export 'loading_overlay/loading_overlay.dart';
 export 'progress_indicator.dart';
 export 'scaffold.dart';

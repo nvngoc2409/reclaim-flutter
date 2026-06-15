@@ -40,7 +40,7 @@ class ReclaimPrimaryButton extends StatelessWidget {
               backgroundColor: Colors.transparent,
               foregroundColor: theme.colorScheme.onPrimary,
               disabledForegroundColor: theme.colorScheme.onPrimary,
-              textStyle: theme.textTheme.titleMedium?.copyWith(),
+              textStyle: theme.textTheme.titleMedium,
             ),
           ),
           child: Container(
@@ -48,7 +48,7 @@ class ReclaimPrimaryButton extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  ReclaimColors.yellow[80]!,
+                  ReclaimColors.yellow[90]!,
                   ReclaimColors.yellow,
                   ReclaimColors.pink,
                 ],
@@ -110,7 +110,7 @@ class ReclaimSecondaryButton extends StatelessWidget {
               disabledBackgroundColor: Colors.transparent,
               foregroundColor: theme.colorScheme.onPrimary,
               disabledForegroundColor: theme.colorScheme.onPrimary,
-              textStyle: theme.textTheme.titleMedium?.copyWith(),
+              textStyle: theme.textTheme.titleMedium,
             ),
           ),
           child: Container(
@@ -209,7 +209,10 @@ class ReclaimOutlinedButton extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(horizontal: ReclaimSpacing.medium, vertical: ReclaimSpacing.extraSmall),
               alignment: Alignment.center,
-              child: Text(title),
+              child: Text(
+                title,
+                style: TextTheme.of(context).titleMedium,
+              ),
             ),
           ),
         ),

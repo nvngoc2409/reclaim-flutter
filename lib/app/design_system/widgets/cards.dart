@@ -25,7 +25,7 @@ class ReclaimLavenderCard extends StatelessWidget {
 
     // Base style from home-action-lavender
     final cardBorderColor = borderColor ?? ReclaimColors.neutral[100]!.withValues(alpha: 0.2);
-    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 24);
+    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: ReclaimSpacing.normal, vertical: ReclaimSpacing.normal);
 
     return Container(
       margin: margin,
@@ -138,13 +138,10 @@ class ReclaimGreenCard extends StatelessWidget {
 
     // Base style from green card CSS
     final cardBorderColor = borderColor ?? ReclaimColors.blue.withValues(alpha: 0.18);
-    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 24);
+    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: ReclaimSpacing.normal, vertical: ReclaimSpacing.normal);
 
     return Container(
       margin: margin,
-      constraints: const BoxConstraints(
-        minHeight: 96,
-      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(finalCornerRadius),
         border: Border.all(color: cardBorderColor, width: 2),
@@ -233,13 +230,10 @@ class ReclaimYellowCard extends StatelessWidget {
 
     // Base style from yellow card CSS
     final cardBorderColor = borderColor ?? ReclaimColors.yellow.withValues(alpha: 0.2);
-    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 24);
+    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: ReclaimSpacing.normal, vertical: ReclaimSpacing.normal);
 
     return Container(
       margin: margin,
-      constraints: const BoxConstraints(
-        minHeight: 96,
-      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(finalCornerRadius),
         border: Border.all(color: cardBorderColor, width: 2),
@@ -325,21 +319,63 @@ class ReclaimCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final finalCornerRadius = cornerRadius ?? 24;
+    final finalCornerRadius = cornerRadius ?? 20;
 
     // Base style from home-action-lavender
-    final cardBorderColor = borderColor ?? ReclaimColors.neutral[100]!.withValues(alpha: 0.2);
-    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 24);
+    final cardBorderColor = borderColor ?? ReclaimColors.neutral[100]!.withValues(alpha: 0.14);
+    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: ReclaimSpacing.normal, vertical: ReclaimSpacing.normal);
 
     return Container(
       margin: margin,
-      constraints: const BoxConstraints(
-        minHeight: 96,
-      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(finalCornerRadius),
         border: Border.all(color: cardBorderColor, width: 2),
-        gradient: LinearGradient(colors: [Colors.white.withValues(alpha: 0.0086), Colors.white.withValues(alpha: 0.035)]),
+        color: Colors.white.withValues(alpha: 0.086),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(finalCornerRadius - 1),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(finalCornerRadius - 1),
+          child: Padding(padding: defaultPadding, child: child),
+        ),
+      ),
+    );
+  }
+}
+
+class ReclaimSelectionCard extends StatelessWidget {
+  const ReclaimSelectionCard({
+    required this.child,
+    this.margin,
+    this.cornerRadius,
+    this.padding,
+    this.isSelected = false,
+    this.onTap,
+    super.key,
+  });
+
+  final Widget child;
+  final EdgeInsetsGeometry? margin;
+  final double? cornerRadius;
+  final EdgeInsetsGeometry? padding;
+  final bool isSelected;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final finalCornerRadius = cornerRadius ?? 20;
+
+    // Base style from home-action-lavender
+    final cardBorderColor = isSelected ? ReclaimColors.lavender.withValues(alpha: 0.5) : ReclaimColors.neutral[100]!.withValues(alpha: 0.14);
+    final defaultPadding = padding ?? const EdgeInsets.symmetric(horizontal: ReclaimSpacing.normal, vertical: ReclaimSpacing.normal);
+
+    return Container(
+      margin: margin,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(finalCornerRadius),
+        border: Border.all(color: cardBorderColor, width: 2),
+        color: Colors.white.withValues(alpha: 0.086),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(finalCornerRadius - 1),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reclaim/app/app.dart';
-import 'package:reclaim/auth/auth.dart';
 import 'package:reclaim/home/home.dart';
+import 'package:reclaim/onboarding/onboarding.dart';
 import 'package:reclaim/splash_screen/splash_screen.dart';
 import 'package:typewritertext/typewritertext.dart';
 
@@ -39,7 +39,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       bloc: _bloc,
       listener: (context, state) {
         if (state is SplashStateLoaded) {
-          _showNextScreen(hasUserLoggedIn: state.hasUserLoggedIn);
+          _showNextScreen(isOnboardingDone: state.isOnboardingDone);
         }
       },
       child: Scaffold(
@@ -120,11 +120,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     );
   }
 
-  void _showNextScreen({required bool hasUserLoggedIn}) {
-    if (hasUserLoggedIn) {
+  void _showNextScreen({required bool isOnboardingDone}) {
+    if (isOnboardingDone) {
       context.goNamed(HomePage.routeName);
     } else {
-      context.goNamed(LoginPage.routeName);
+      context.goNamed(LandingPage.routeName);
     }
   }
 }

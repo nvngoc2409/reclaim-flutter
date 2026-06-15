@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reclaim/app/app.dart';
-import 'package:reclaim/auth/auth.dart';
 import 'package:reclaim/home/ui/home_cubit/home_cubit.dart';
+import 'package:reclaim/onboarding/ui/view/landing_page.dart';
 
 /// The main page of the app, acting as a shell for showing the pages selected by the
 /// bottom [NavigationBar].
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
       listener: (context, effect) {
         switch (effect) {
           case HomeStateEffectLogout():
-            context.pushNamed(LoginPage.routeName);
+            context.pushNamed(LandingPage.routeName);
           case HomeStateEffectError(errorMessage: final errorMessage):
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(errorMessage)),

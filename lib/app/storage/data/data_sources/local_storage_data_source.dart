@@ -39,4 +39,11 @@ class LocalStorageDataSource {
   Future<void> deleteAll() async => sharedPreferences.clear();
 }
 
-enum StorageKey { isFirstRun, storageVersion, user, accessToken, refreshToken }
+enum StorageKey {
+  isFirstRun,
+  storageVersion,
+  user,
+  accessToken,
+  refreshToken,
+  isOnboardingDone,
+}
