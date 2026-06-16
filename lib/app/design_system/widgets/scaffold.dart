@@ -70,13 +70,14 @@ class ReclaimAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
+    final showBackButton = automaticallyImplyLeading && _shouldShowBackButton(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: ReclaimSpacing.normal, vertical: ReclaimSpacing.small),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (automaticallyImplyLeading && context.canPop())
+          if (automaticallyImplyLeading && showBackButton)
             Padding(
               padding: const EdgeInsets.only(bottom: ReclaimSpacing.normal),
               child: ReclaimIconButton(
@@ -97,5 +98,11 @@ class ReclaimAppBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _shouldShowBackButton(BuildContext context) {
+    final route = ModalRoute.of(context);
+
+    return route is PageRoute && route.canPop;
   }
 }

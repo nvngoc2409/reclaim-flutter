@@ -32,20 +32,7 @@ final router = GoRouter(
       ),
     ),
     StatefulShellRoute.indexedStack(
-      pageBuilder: (context, routerState, navigationShell) {
-        // Fade transition coming from the SplashScreenPage.
-        return CustomTransitionPage<void>(
-          key: routerState.pageKey,
-          child: BottomNavigationShellPage(navigationShell: navigationShell),
-          transitionDuration: const Duration(milliseconds: 400),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
-              child: child,
-            );
-          },
-        );
-      },
+      builder: (context, routerState, navigationShell) => BottomNavigationShellPage(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           routes: [
@@ -84,6 +71,11 @@ final router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      name: HowItWorkPage.routeName,
+      path: '/${HowItWorkPage.routeName}',
+      builder: (context, routerState) => const HowItWorkPage(),
     ),
   ],
 );

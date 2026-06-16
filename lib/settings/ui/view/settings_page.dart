@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reclaim/app/app.dart';
+import 'package:reclaim/settings/settings.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -21,7 +22,10 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _SettingItem(title: 'How this works', onTap: () {}),
+            _SettingItem(
+              title: 'How this works',
+              onTap: () => context.pushNamed(HowItWorkPage.routeName),
+            ),
             const Divider(
               indent: ReclaimSpacing.normal,
               endIndent: ReclaimSpacing.normal,
@@ -41,7 +45,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 _SettingItem(
                   title: 'Wake-up reminder',
                   trailing: ReclaimSwitch(
-                    value: false,
                     onChanged: (value) {},
                   ),
                 ),
