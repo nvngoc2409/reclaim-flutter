@@ -93,7 +93,7 @@ class ReclaimAppBar extends StatelessWidget {
               ),
             ),
           if (subTitle != null) Text(subTitle!, style: textTheme.bodyLarge),
-          Text(title, style: textTheme.headlineLarge),
+          Text(title, style: textTheme.headlineMedium),
         ],
       ),
     );

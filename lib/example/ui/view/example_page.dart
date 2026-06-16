@@ -79,17 +79,17 @@ class GithubRepositoriesList extends StatelessWidget {
         );
         switch (index % 4) {
           case 1:
-            return ReclaimGreenCard(
+            return ReclaimCard.green(
               child: child,
               onTap: () {},
             );
           case 2:
-            return ReclaimYellowCard(
+            return ReclaimCard.yellow(
               child: child,
               onTap: () {},
             );
           case 3:
-            return ReclaimLavenderCard(
+            return ReclaimCard.lavender(
               child: child,
               onTap: () {},
             );

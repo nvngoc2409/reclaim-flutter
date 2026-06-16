@@ -75,7 +75,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       padding: const EdgeInsets.symmetric(horizontal: ReclaimSpacing.normal, vertical: ReclaimSpacing.extraLarge),
                       child: Column(
                         children: [
-                          Text('Building your sleep support…', style: textTheme.headlineLarge),
+                          Text('Building your sleep support…', style: textTheme.headlineMedium),
                           const SizedBox(height: ReclaimSpacing.normal),
                           Text("I'm putting this together based on your answers — using proven tools for midlife sleep.", style: textTheme.bodyMedium),
                           const SizedBox(height: ReclaimSpacing.large),

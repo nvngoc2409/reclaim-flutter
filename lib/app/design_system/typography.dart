@@ -17,5 +17,5 @@ final reclaimTextTheme = TextTheme(
   labelSmall: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800)),
   bodyLarge: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
   bodyMedium: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-  bodySmall: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400)),
+  bodySmall: GoogleFonts.nunito(textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400)),
 );

@@ -18,7 +18,7 @@ class LandingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Let's personalize your experience.", style: textTheme.headlineLarge),
+            Text("Let's personalize your experience.", style: textTheme.headlineMedium),
             const SizedBox(height: ReclaimSpacing.normal),
             Text('This takes less than 30 seconds.', style: textTheme.bodyMedium),
             const SizedBox(height: ReclaimSpacing.medium),
