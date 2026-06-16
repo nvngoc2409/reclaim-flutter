@@ -6,4 +6,5 @@ export 'loading_dots.dart';
 export 'loading_overlay/loading_overlay.dart';
 export 'progress_indicator.dart';
 export 'scaffold.dart';
+export 'switch.dart';
 export 'text_field.dart';

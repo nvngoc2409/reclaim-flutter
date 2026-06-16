@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reclaim/app/app.dart';
-import 'package:reclaim/example/example.dart';
 import 'package:reclaim/home/home.dart';
 import 'package:reclaim/onboarding/onboarding.dart';
+import 'package:reclaim/settings/settings.dart';
 import 'package:reclaim/splash_screen/splash_screen.dart';
 
 final router = GoRouter(
@@ -79,7 +79,7 @@ final router = GoRouter(
             GoRoute(
               name: 'settings',
               path: '/settings',
-              builder: (context, routerState) => const SizedBox.shrink(),
+              builder: (context, routerState) => const SettingsPage(),
             ),
           ],
         ),
