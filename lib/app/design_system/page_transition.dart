@@ -22,36 +22,6 @@ class ReclaimCupertinoPageTransitionsBuilder extends PageTransitionsBuilder {
   Duration get transitionDuration => kPageTransitionDuration;
 
   @override
-  DelegatedTransitionBuilder? get delegatedTransition => _delegatedTransition;
-
-  static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
-
-  static Widget? _delegatedTransition(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    bool allowSnapshotting,
-    Widget? child,
-  ) {
-    final animation = CurvedAnimation(
-      parent: secondaryAnimation,
-      curve: Curves.linearToEaseOut,
-      reverseCurve: Curves.easeInToLinear,
-    );
-    final delegatedPositionAnimation = animation.drive(_kLeftTween);
-    final delegatedFadingAnimation = animation.drive(Tween<double>(begin: 1, end: 0));
-    animation.dispose();
-
-    final textDirection = Directionality.of(context);
-    return SlideTransition(
-      position: delegatedPositionAnimation,
-      textDirection: textDirection,
-      transformHitTests: false,
-      child: FadeTransition(opacity: delegatedFadingAnimation, child: child),
-    );
-  }
-
-  @override
   Widget buildTransitions<T>(
     PageRoute<T> route,
     BuildContext context,
@@ -59,12 +29,51 @@ class ReclaimCupertinoPageTransitionsBuilder extends PageTransitionsBuilder {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    return CupertinoRouteTransitionMixin.buildPageTransitions<T>(
-      route,
-      context,
-      animation,
-      secondaryAnimation,
-      FadeTransition(opacity: animation.drive(_easeInTween), child: child),
+    return DualTransitionBuilder(
+      animation: animation,
+      forwardBuilder: (context, animation, child) {
+        return SlideTransition(
+          position:
+              Tween<Offset>(
+                begin: const Offset(1, 0),
+                end: Offset.zero,
+              ).animate(
+                CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeOutCubic,
+                ),
+              ),
+          child: child,
+        );
+      },
+      reverseBuilder: (context, animation, child) {
+        return SlideTransition(
+          position:
+              Tween<Offset>(
+                begin: Offset.zero,
+                end: const Offset(1, 0),
+              ).animate(
+                CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeOutCubic,
+                ),
+              ),
+          child: child,
+        );
+      },
+      child: SlideTransition(
+        position:
+            Tween<Offset>(
+              begin: Offset.zero,
+              end: const Offset(-1, 0),
+            ).animate(
+              CurvedAnimation(
+                parent: secondaryAnimation,
+                curve: Curves.easeOutCubic,
+              ),
+            ),
+        child: child,
+      ),
     );
   }
 }
