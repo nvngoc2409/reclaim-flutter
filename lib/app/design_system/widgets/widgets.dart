@@ -1,3 +1,4 @@
+export 'bottom_navigation_bar.dart';
 export 'buttons.dart';
 export 'cards.dart';
 export 'dialog.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reclaim/app/app.dart';
 import 'package:reclaim/example/example.dart';
 import 'package:reclaim/home/home.dart';
 import 'package:reclaim/onboarding/onboarding.dart';
@@ -58,9 +59,27 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              name: ExamplePage.routeName,
-              path: '/${ExamplePage.routeName}',
-              builder: (context, routerState) => const ExamplePage(),
+              name: 'morning',
+              path: '/morning',
+              builder: (context, routerState) => const SizedBox.shrink(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              name: 'profile',
+              path: '/profile',
+              builder: (context, routerState) => const SizedBox.shrink(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              name: 'settings',
+              path: '/settings',
+              builder: (context, routerState) => const SizedBox.shrink(),
             ),
           ],
         ),
